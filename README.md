@@ -29,9 +29,9 @@ K-Means clustering groups customers into behavioral segments automatically, vali
 | Segment | Customers | % Revenue | Recommended Action |
 |---|---|---|---|
 | Champions | 962 (22.2%) | 65.2% | Reward with loyalty perks, ask for referrals |
-| Loyal Customers | 998 (23.0%) | — | Upsell premium products |
-| New Customers | 319 (7.4%) | — | Strong onboarding sequence |
-| Potential Loyalists | 351 (8.1%) | — | Nurture with targeted offers |
+| Loyal Customers | 998 (23.0%) | 16.5% | Upsell premium products |
+| New Customers | 319 (7.4%) | 1.6% | Strong onboarding sequence |
+| Potential Loyalists | 351 (8.1%) | 1.8% | Nurture with targeted offers |
 | At-Risk | 643 (14.8%) | 9.0% | Urgent win-back campaign |
 | Lost | 1065 (24.6%) | 5.8% | Low priority re-engagement |
 
