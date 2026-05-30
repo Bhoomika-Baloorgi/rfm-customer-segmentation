@@ -42,6 +42,7 @@ K-Means clustering groups customers into behavioral segments automatically, vali
 - `streamlit` — interactive dashboard
 
 ## Project Structure
+```plaintext
 rfm-customer-segmentation/
 ├── data/                    # Raw dataset (not committed)
 ├── src/
@@ -52,7 +53,7 @@ rfm-customer-segmentation/
 ├── main.py                  # Run full pipeline
 ├── app.py                   # Streamlit dashboard
 └── requirements.txt
-
+```
 ## How to Run
 ```bash
 # 1. Install dependencies
