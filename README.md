@@ -3,31 +3,37 @@
 ## Problem
 Businesses struggle to treat all customers the same way — a first-time buyer and a loyal high-spender need completely different marketing strategies. This project segments customers based on actual purchase behavior, so marketing teams can target each group with the right action.
 
+## Key Findings
+- Champions are only 22% of customers but drive **65.2% of total revenue (£5.8M out of £8.9M)**
+- At-Risk customers represent £800K in revenue at risk of being lost — urgent win-back needed
+- Lost customers (24.6% of base) account for only 5.8% of revenue — low re-engagement priority
+- Monetary values are heavily skewed (one customer spent £280K) — Silhouette score favoured k=2, but rule-based RFM segmentation was used as the primary method for more meaningful business labels
+- PCA explained 85.8% of variance in just 2 components
+
 ## Approach
 **RFM Framework** — every customer is scored on three dimensions:
 - **Recency** — how recently did they buy?
 - **Frequency** — how often do they buy?
 - **Monetary** — how much have they spent?
 
-K-Means clustering then groups customers into behavioral segments automatically, validated with the Silhouette score.
+K-Means clustering groups customers into behavioral segments automatically, validated with the Silhouette score and Elbow method.
+
+## Dashboard
+![Customer Segmentation Dashboard](screenshots/dashboard.png)
+![PCA Cluster Visualization](screenshots/pca_clusters.png)
 
 ## Dataset
-[UCI Online Retail Dataset](https://archive.ics.uci.edu/dataset/352/online+retail) — 541,909 real transactions from a UK-based online retailer (2010–2011).
+[UCI Online Retail Dataset](https://archive.ics.uci.edu/dataset/352/online+retail) — 541,909 real transactions from a UK-based online retailer (2010–2011). After cleaning: 397,884 transactions across 4,338 unique customers.
 
 ## Segments Identified
-| Segment | Description | Recommended Action |
-|---|---|---|
-| Champions | High R, F, M | Reward, ask for referrals |
-| Loyal Customers | High F & M, moderate R | Upsell premium products |
-| New Customers | High R, low F | Strong onboarding sequence |
-| Potential Loyalists | Good R & F, growing M | Nurture with targeted offers |
-| At-Risk | Low R, used to buy often | Win-back campaign urgently |
-| Lost | Low R, F, M | Low priority re-engagement |
-
-## Key Findings
-- Champions make up ~X% of customers but drive ~Y% of revenue
-- At-Risk segment has highest average order value — high business cost if lost
-- Elbow method + Silhouette score both suggested k=4 as optimal
+| Segment | Customers | % Revenue | Recommended Action |
+|---|---|---|---|
+| Champions | 962 (22.2%) | 65.2% | Reward with loyalty perks, ask for referrals |
+| Loyal Customers | 998 (23.0%) | — | Upsell premium products |
+| New Customers | 319 (7.4%) | — | Strong onboarding sequence |
+| Potential Loyalists | 351 (8.1%) | — | Nurture with targeted offers |
+| At-Risk | 643 (14.8%) | 9.0% | Urgent win-back campaign |
+| Lost | 1065 (24.6%) | 5.8% | Low priority re-engagement |
 
 ## Tech Stack
 - `pandas` — data cleaning and RFM feature engineering
@@ -36,18 +42,16 @@ K-Means clustering then groups customers into behavioral segments automatically,
 - `streamlit` — interactive dashboard
 
 ## Project Structure
-```
 rfm-customer-segmentation/
 ├── data/                    # Raw dataset (not committed)
 ├── src/
 │   ├── rfm_analysis.py      # Data cleaning + RFM computation
 │   ├── clustering.py        # K-Means + PCA visualization
 │   └── visualizations.py    # EDA plots + segment charts
-├── outputs/                 # Generated charts and CSV
+├── screenshots/             # Dashboard preview images
 ├── main.py                  # Run full pipeline
 ├── app.py                   # Streamlit dashboard
 └── requirements.txt
-```
 
 ## How to Run
 ```bash
@@ -55,6 +59,7 @@ rfm-customer-segmentation/
 pip install -r requirements.txt
 
 # 2. Download dataset → save as data/online_retail.xlsx
+# https://archive.ics.uci.edu/dataset/352/online+retail
 
 # 3. Run the full pipeline
 python main.py
@@ -62,11 +67,3 @@ python main.py
 # 4. Launch the dashboard
 streamlit run app.py
 ```
-
-## Results
-All output charts are saved to `outputs/`:
-- `elbow_silhouette.png` — choosing optimal k
-- `cluster_pca.png` — 2D cluster visualization
-- `segment_counts.png` — customer distribution
-- `segment_heatmap.png` — avg RFM per segment
-- `customer_segments.csv` — final labelled dataset
